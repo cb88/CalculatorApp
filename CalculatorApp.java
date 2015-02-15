@@ -10,11 +10,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
+import java.lang.Math;
 
 public class CalculatorApp {
 
 	JButton one, two, three, four, five, six, seven, 
-		eight, nine, dot, zero, addition, subtract, multiply, divide, equals, clear;
+		eight, nine, dot, zero, addition, subtract, multiply, divide,
+                sin, cos, tan, asin, acos, atan , equals, clear;
 	
 	JTextField textBox;
 	
@@ -56,6 +58,12 @@ public class CalculatorApp {
 		divide = new JButton(" / ");
 		equals = new JButton(" = "); 
 		clear = new JButton("clear");
+                sin = new JButton("sin(x)");
+                cos = new JButton("cos(x)");
+                tan = new JButton("tan(x)");
+                asin = new JButton("asin(x)");
+                acos = new JButton("acos(x)");
+                atan = new JButton("atan(x)");
 
 		//create active listeners
 		one.addActionListener(new ButtonOne());
@@ -75,6 +83,12 @@ public class CalculatorApp {
 		divide.addActionListener(new DivideButton());
 		equals.addActionListener(new EqualsButton());
 		clear.addActionListener(new ClearButton());
+                sin.addActionListener(new SinButton());
+                cos.addActionListener(new CosButton());
+                tan.addActionListener(new TanButton());
+                asin.addActionListener(new AsinButton());
+                acos.addActionListener(new AcosButton());
+                atan.addActionListener(new AtanButton());
 		
 		//Create layout
 		frame.getContentPane().add(BorderLayout.NORTH, textBox);
@@ -96,6 +110,12 @@ public class CalculatorApp {
 		pane.add(subtract);
 		pane.add(multiply);
 		pane.add(divide);
+                pane.add(sin);
+                pane.add(cos);
+                pane.add(tan);
+                pane.add(asin);
+                pane.add(acos);
+                pane.add(atan);
 		pane.add(clear);
 		pane.add(equals);
 		
@@ -204,6 +224,54 @@ public class CalculatorApp {
 		}
 	}
 
+       class SinButton implements ActionListener {
+                public void actionPerformed(ActionEvent event) {
+                        num1 = Double.parseDouble(textBox.getText());
+                        num1 = Math.sin(num1);
+                        textBox.setText(String.valueOf(num1));
+                        }
+        }
+
+       class CosButton implements ActionListener {
+                public void actionPerformed(ActionEvent event) {
+                        num1 = Double.parseDouble(textBox.getText());
+                        num1 = Math.cos(num1);
+                        textBox.setText(String.valueOf(num1));
+                }
+        }
+
+       class TanButton implements ActionListener {
+                public void actionPerformed(ActionEvent event) {
+                        num1 = Double.parseDouble(textBox.getText());
+                        num1 = Math.tan(num1);
+                        textBox.setText(String.valueOf(num1));
+                }
+        }
+
+       class AsinButton implements ActionListener {
+                public void actionPerformed(ActionEvent event) {
+                        num1 = Double.parseDouble(textBox.getText());
+                        num1 = Math.asin(num1);
+                        textBox.setText(String.valueOf(num1));
+                }
+        }
+
+       class AcosButton implements ActionListener {
+                public void actionPerformed(ActionEvent event) {
+                        num1 = Double.parseDouble(textBox.getText());
+                        num1 = Math.acos(num1);
+                        textBox.setText(String.valueOf(num1));
+                }
+        }
+
+       class AtanButton implements ActionListener {
+                public void actionPerformed(ActionEvent event) {
+                        num1 = Double.parseDouble(textBox.getText());
+			num1 = Math.atan(num1);
+                        textBox.setText(String.valueOf(num1));
+                }
+        }
+
 	class EqualsButton implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			num2 = Double.parseDouble(textBox.getText());
@@ -215,7 +283,7 @@ public class CalculatorApp {
 					result = num1 * num2;
 				} else if(operation == 'd'){
 					result = num1 / num2;
-				} else
+     				} else
 					result = 0;
 			
 			textBox.setText(formater.format(result));
